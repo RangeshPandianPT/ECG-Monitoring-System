@@ -1,34 +1,110 @@
 # ECG Monitor Project
+## ECG Monitor Project
 
-## Project info
+A web-based Electrocardiogram (ECG) monitoring dashboard that reads streaming ECG data from a serial device (for example, an Arduino) and displays it in real time. The app also includes utilities and UI components to inspect, record, and visualize the ECG waveform.
 
-Simple web app that connects to an Arduino to stream and display ECG data in real-time.
+This repository has been converted to a JavaScript-based Vite + React application (originally started in TypeScript). All core UI components have JS/JSX equivalents and the project is buildable with a standard Node.js toolchain.
 
-## How can I edit this code?
+Highlights
+- Real-time ECG rendering using an HTML canvas with device-pixel-ratio aware drawing.
+- Web Serial API support for connecting to Arduino-like devices over a serial port (demo-mode available when no device is connected).
+- Lightweight UI primitives (shadcn-style) adapted to plain JS/JSX for easier consumption.
+- Tailwind CSS for styling and responsive layout.
 
-You can edit the code locally with your preferred IDE. Requirements: Node.js and npm.
+Table of contents
+- Features
+- Quick start
+- Development
+- Build & deploy
+- Project structure
+- Troubleshooting
+- Contributing
+- License
 
-Quick start:
+Features
+- Real-time ECG plot with adjustable sampling and smoothing.
+- Serial device connection flow (connect / disconnect / demo mode).
+- Mobile-friendly responsive layout and DPR-correct canvas rendering.
+- Toast notifications for errors and status (Sonner-based).
 
-```sh
-git clone <YOUR_GIT_URL>
-cd <YOUR_PROJECT_NAME>
+Quick start
+1. Requirements
+	 - Node.js (v16+ recommended)
+	 - npm (or pnpm/yarn, adapt commands accordingly)
+
+2. Clone and run locally
+
+```powershell
+git clone https://github.com/RangeshPandianPT/ECG-Monitoring-System.git
+cd ECG-Monitoring-System
 npm install
 npm run dev
+# Open http://localhost:8080 in your browser
 ```
 
-## What technologies are used for this project?
+Development
+- Start a dev server with hot reload:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```powershell
+npm run dev
+```
+- Run a production build locally:
 
-## How can I deploy this project?
+```powershell
+npm run build
+npm run preview
+```
 
-Deploy with any static host that supports Vite builds (Vercel, Netlify, GitHub Pages, etc.). Build with `npm run build` and follow your host's deploy steps.
+Project structure
+- `src/` — application source
+	- `src/main.jsx` — app entry
+	- `src/App.jsx` — top-level app and router
+	- `src/components/ECGMonitor.jsx` — ECG canvas + serial logic (converted from TS)
+	- `src/components/ui/` — UI primitives and wrappers (JSX)
+	- `src/lib/utils.js` — small utilities (class names)
 
-## Custom domain
+- `vite.config.js` — Vite config (converted from TS)
+- `tailwind.config.cjs` — Tailwind config (converted from TS)
 
-Connect a custom domain in your hosting provider's dashboard following their guides.
+Build & deploy
+- Build the app for production:
+
+```powershell
+npm run build
+```
+
+- Deploy the contents of the `dist/` folder to any static hosting provider (Vercel, Netlify, GitHub Pages, S3 + CloudFront, etc.). Vercel and Netlify will accept the project directly and run `npm run build` as part of the deployment flow.
+
+If you use a platform that serves from a specific folder, point it at `dist/` after build.
+
+Configuration and environment
+- The app is configured for local development on port 8080 by default (see `vite.config.js`).
+- Tailwind configuration is in `tailwind.config.cjs`.
+
+Troubleshooting
+- If the app fails to build after pulling changes:
+	1. Ensure dependencies are installed: `npm install`.
+	2. If you previously used TypeScript and removed it, run a clean install:
+
+```powershell
+rm -rf node_modules package-lock.json
+npm install
+```
+
+	3. Run `npm run build` and inspect any error messages. Common issues relate to missing files or mismatched import paths; these will be shown in the Vite output.
+
+Contributing
+- Contributions are welcome. Suggested workflow:
+	1. Fork the repo and create a feature branch from `main`.
+	2. Make changes and keep builds green locally.
+	3. Open a pull request describing the change and the motivation.
+
+When converting components from TypeScript to JavaScript, try to preserve public props and behaviors. Add tests for complex UI behavior where helpful.
+
+Notes about the conversion
+- This repository was migrated from TypeScript to JavaScript in a staged approach. Core UI components were ported to `.jsx` files; TypeScript configs and `.ts/.tsx` sources were removed. If you need the original TypeScript sources, check the branch history prior to the conversion commits.
+
+License
+- This project is provided under the MIT license (check `LICENSE` if present).
+
+If you'd like a shorter README or additional sections (API docs, architecture diagram, CI setup), tell me which sections to add and I will update the file.
