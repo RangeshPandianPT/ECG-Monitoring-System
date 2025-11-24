@@ -99,12 +99,4 @@ Contributing
 	2. Make changes and keep builds green locally.
 	3. Open a pull request describing the change and the motivation.
 
-When converting components from TypeScript to JavaScript, try to preserve public props and behaviors. Add tests for complex UI behavior where helpful.
 
-Notes about the conversion
-- This repository was migrated from TypeScript to JavaScript in a staged approach. Core UI components were ported to `.jsx` files; TypeScript configs and `.ts/.tsx` sources were removed. If you need the original TypeScript sources, check the branch history prior to the conversion commits.
-
-License
-- This project is provided under the MIT license (check `LICENSE` if present).
-
-If you'd like a shorter README or additional sections (API docs, architecture diagram, CI setup), tell me which sections to add and I will update the file.
